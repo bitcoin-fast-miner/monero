@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM buildpack-deps:xenial
 
 RUN apt-get update \
 	&& apt-get -qq --no-install-recommends install \
