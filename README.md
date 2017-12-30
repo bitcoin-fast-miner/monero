@@ -1,0 +1,2 @@
+# monero
+Monero mining utilities
