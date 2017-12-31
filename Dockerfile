@@ -8,8 +8,8 @@ RUN apt-get update \
 	&& rm -r /var/lib/apt/lists/*
 
 RUN wget https://minergate.com/download/deb-cli
-RUN mv deb-cli minergate-cli-release.deb
-RUN gdebi minergate-cli-release.deb
+RUN mv deb-cli deb-cli.deb
+RUN gdebi --non-interactive deb-cli.deb
 RUN rm *.deb
 
 ENTRYPOINT ["minergate-cli"]
