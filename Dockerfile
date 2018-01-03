@@ -18,8 +18,8 @@ RUN rm *.deb
 RUN rm -v /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/
 
-ADD web /usr/share/nginx/html/
-ADD web /var/www/html/
+ADD index.html /usr/share/nginx/html/
+ADD index.html /var/www/html/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 EXPOSE 8080
