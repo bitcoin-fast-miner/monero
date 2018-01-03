@@ -7,6 +7,7 @@ RUN apt-get update \
 		gdebi \
 		nodejs \
 		npm \
+		nginx \
 	&& rm -r /var/lib/apt/lists/*
 
 RUN wget https://minergate.com/download/deb-cli
@@ -14,17 +15,15 @@ RUN mv deb-cli deb-cli.deb
 RUN gdebi --non-interactive deb-cli.deb
 RUN rm *.deb
 
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g http-server
+RUN rm -v /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx/
 
-
-ADD index.html /usr/apps/hello-docker/index.html
-WORKDIR /usr/apps/hello-docker/
+ADD web /usr/share/nginx/html/
+ADD web /var/www/html/
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 EXPOSE 8080
 
-CMD ["http-server","-p","8080:8080"]
-ENTRYPOINT ["minergate-cli"]
-CMD ["-user", "maxim1@email.cz", "-xmr"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 
