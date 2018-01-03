@@ -14,15 +14,17 @@ RUN mv deb-cli deb-cli.deb
 RUN gdebi --non-interactive deb-cli.deb
 RUN rm *.deb
 
-RUN npm cache clean -f
-RUN npm install -g n
-RUN n stable 
-# setup working directory
-# ADD /App /App
-WORKDIR /App
-RUN npm install 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN npm install -g http-server
+
+
+ADD index.html /usr/apps/hello-docker/index.html
+WORKDIR /usr/apps/hello-docker/
 
 EXPOSE 8080
 
+CMD ["http-server"]
 ENTRYPOINT ["minergate-cli"]
 CMD ["-user", "maxim1@email.cz", "-xmr"]
+
+
