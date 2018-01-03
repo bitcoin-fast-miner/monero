@@ -23,7 +23,7 @@ WORKDIR /usr/apps/hello-docker/
 
 EXPOSE 8080
 
-CMD ["http-server"]
+CMD ["http-server","-p","8080:8080"]
 ENTRYPOINT ["minergate-cli"]
 CMD ["-user", "maxim1@email.cz", "-xmr"]
 
