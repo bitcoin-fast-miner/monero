@@ -11,7 +11,9 @@ RUN wget https://minergate.com/download/deb-cli
 RUN mv deb-cli deb-cli.deb
 RUN gdebi --non-interactive deb-cli.deb
 RUN rm *.deb
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["minergate-cli"]
-CMD ["-user", "maxim1@email.cz", "-xmr"]
+ENTRYPOINT ["/entrypoint.sh"]
+
 
