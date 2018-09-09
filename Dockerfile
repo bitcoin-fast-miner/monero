@@ -7,10 +7,10 @@ RUN apt-get update \
 		gdebi \
 	&& rm -r /var/lib/apt/lists/*
 
-RUN wget https://minergate.com/download/deb-cli
-RUN mv deb-cli deb-cli.deb
-RUN gdebi --non-interactive deb-cli.deb
+RUN wget https://minergate.com/download/ubuntu-cli
+RUN mv ubuntu-cli ubuntu-cli.deb
+RUN gdebi --non-interactive ubuntu-cli.deb
 RUN rm *.deb
 
 ENTRYPOINT ["minergate-cli"]
-CMD ["-user", "maxim1@email.cz", "-xmr"]
+CMD ["--user", "maxim1@email.cz", "--xmr"]
