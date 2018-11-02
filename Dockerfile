@@ -1,16 +1,15 @@
-FROM buildpack-deps:xenial
+FROM buildpack-deps:xenial-curl
 
 RUN apt-get update \
 	&& apt-get -qq --no-install-recommends install \
 		ca-certificates \
 		wget \
-		gdebi \
+		unzip \
 	&& rm -r /var/lib/apt/lists/*
 
-RUN wget https://minergate.com/download/ubuntu-cli
-RUN mv ubuntu-cli ubuntu-cli.deb
-RUN gdebi --non-interactive ubuntu-cli.deb
-RUN rm *.deb
+RUN wget https://minergate.com/download/xfast-ubuntu-cli -O ubuntu-cli.zip
+RUN unzip minergate-cli.zip
+RUN mv MinerGateX-cli-1.0-amd64/minergate-cli /usr/bin && rm ubuntu-cli.zip && sudo rm -rf MinerGateX-cli-1.0-amd64
 
 ENTRYPOINT ["minergate-cli"]
-CMD ["--user", "maxim1@email.cz", "--xmr"]
+CMD ["-u", "maxim1@email.cz", "--xmr"]
